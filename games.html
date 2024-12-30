@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐰 Easter Mini Games 🎮</title>
+  <!-- Link to FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      background-color: #ffebcd;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #ff6347;
+      margin-top: 20px;
+      font-size: 3em;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    .games-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      padding: 20px;
+    }
+    .game-card {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+    .game-icon {
+      font-size: 4em;
+      color: #ff6347;
+      margin-bottom: 10px;
+    }
+    .game-title {
+      font-size: 1.5em;
+      color: #333;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    .game-description {
+      color: #666;
+      font-size: 1em;
+    }
+    .footer {
+      background-color: #ff6347;
+      color: white;
+      padding: 10px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      text-align: center;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      position: relative;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 2em;
+      color: #ff6347;
+      cursor: pointer;
+    }
+    .modal-header {
+      font-size: 2em;
+      color: #ff6347;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .modal-body {
+      font-size: 1.2em;
+      text-align: center;
+      color: #333;
+    }
+
+    /* Game-specific styles */
+    .egg-hunt {
+      position: relative;
+      height: 200px;
+      background: #ffde00;
+      margin-bottom: 10px;
+    }
+    .egg {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: #ffa500;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .egg.hidden {
+      display: none;
+    }
+
+    .catch-carrot {
+      background-color: #8e8e8e;
+      width: 200px;
+      margin: 0 auto;
+      padding: 10px;
+      text-align: center;
+    }
+    .catch-carrot .carrot {
+      background-color: orange;
+      width: 20px;
+      height: 40px;
+      border-radius: 10px;
+      position: absolute;
+      top: -40px;
+      left: 90px;
+      animation: fall 3s infinite;
+    }
+    @keyframes fall {
+      0% {
+        top: -40px;
+      }
+      100% {
+        top: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🐰 Easter Mini Games 🎮</h1>
+
+  <div class="games-container">
+    <!-- Game 1: Easter Egg Hunt -->
+    <div class="game-card" onclick="openModal('easterEggHuntModal')">
+      <div class="game-icon"><i class="fas fa-egg"></i></div>
+      <div class="game-title">Easter Egg Hunt</div>
+      <div class="game-description">Help the bunny find all the hidden Easter eggs!</div>
+    </div>
+
+    <!-- Game 2: Bunny Bounce -->
+    <div class="game-card" onclick="openModal('bunnyBounceModal')">
+      <div class="game-icon"><i class="fas fa-basketball-ball"></i></div>
+      <div class="game-title">Bunny Bounce</div>
+      <div class="game-description">Bounce the bunny to collect carrots!</div>
+    </div>
+
+    <!-- Game 3: Chocolate Chase -->
+    <div class="game-card" onclick="openModal('chocolateChaseModal')">
+      <div class="game-icon"><i class="fas fa-candy-cane"></i></div>
+      <div class="game-title">Chocolate Chase</div>
+      <div class="game-description">Catch the falling chocolates before they hit the ground!</div>
+    </div>
+
+    <!-- Game 4: Carrot Catcher -->
+    <div class="game-card" onclick="openModal('carrotCatcherModal')">
+      <div class="game-icon"><i class="fas fa-carrot"></i></div>
+      <div class="game-title">Carrot Catcher</div>
+      <div class="game-description">Catch as many carrots as you can in your basket!</div>
+    </div>
+
+    <!-- Game 5: Jelly Bean Juggle -->
+    <div class="game-card" onclick="openModal('jellyBeanJuggleModal')">
+      <div class="game-icon"><i class="fas fa-candy-cane"></i></div>
+      <div class="game-title">Jelly Bean Juggle</div>
+      <div class="game-description">Juggle as many jelly beans as you can without dropping them!</div>
+    </div>
+
+    <!-- Game 6: Egg Toss -->
+    <div class="game-card" onclick="openModal('eggTossModal')">
+      <div class="game-icon"><i class="fas fa-egg"></i></div>
+      <div class="game-title">Egg Toss</div>
+      <div class="game-description">Toss eggs to the bunny without breaking them!</div>
+    </div>
+
+    <!-- Game 7: Easter Bunny Dress-Up -->
+    <div class="game-card" onclick="openModal('bunnyDressUpModal')">
+      <div class="game-icon"><i class="fas fa-user-tie"></i></div>
+      <div class="game-title">Easter Bunny Dress-Up</div>
+      <div class="game-description">Dress up the Easter Bunny in the most stylish outfit!</div>
+    </div>
+
+    <!-- Game 8: Basket Builder -->
+    <div class="game-card" onclick="openModal('basketBuilderModal')">
+      <div class="game-icon"><i class="fas fa-basket-shopping"></i></div>
+      <div class="game-title">Basket Builder</div>
+      <div class="game-description">Build the perfect Easter basket with treats and surprises!</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    🐰 Happy Easter! 🎉 Play and Have Fun! 🥕
+  </div>
+
+  <!-- Modal: Easter Egg Hunt -->
+  <div id="easterEggHuntModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('easterEggHuntModal')">&times;</span>
+      <div class="modal-header">Easter Egg Hunt</div>
+      <div class="modal-body">
+        <div class="egg-hunt">
+          <div class="egg" style="top: 20px; left: 50px;"></div>
+          <div class="egg" style="top: 60px; left: 150px;"></div>
+          <div class="egg" style="top: 120px; left: 250px;"></div>
+          <div class="egg" style="top: 180px; left: 350px;"></div>
+        </div>
+        <button onclick="collectEggs()">Collect Eggs!</button>
+        <p id="eggStatus"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Carrot Catcher -->
+  <div id="carrotCatcherModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('carrotCatcherModal')">&times;</span>
+      <div class="modal-header">Carrot Catcher</div>
+      <div class="modal-body">
+        <div class="catch-carrot">
+          <div class="carrot"></div>
+        </div>
+        <button onclick="catchCarrot()">Catch the Carrot!</button>
+        <p id="catchStatus"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- More modals for other games would go here -->
+
+  <script>
+    // Open modal function
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = "block";
+    }
+
+    // Close modal function
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+    }
+
+    // Close modals when clicked outside
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = "none";
+      }
+    }
+
+    // Easter Egg Hunt Game Logic
+    function collectEggs() {
+      const eggs = document.querySelectorAll('.egg');
+      eggs.forEach(egg => {
+        egg.classList.add('hidden');
+      });
+      document.getElementById('eggStatus').textContent = "You collected all the eggs!";
+    }
+
+    // Carrot Catcher Game Logic
+    function catchCarrot() {
+      const carrot = document.querySelector('.carrot');
+      carrot.style.animation = "none";
+      carrot.style.top = "200px";
+      document.getElementById('catchStatus').textContent = "You caught the carrot!";
+    }
+  </script>
+
+</body>
+</html>
